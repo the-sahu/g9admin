@@ -1,0 +1,1 @@
+this is just a dummy file which makes git to add the uploads folder to tracking directories
