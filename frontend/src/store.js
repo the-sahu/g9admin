@@ -8,13 +8,7 @@ import {
   businessCreateReducer,
   businessUpdateReducer,
 } from "./reducers/businessReducers";
-import {
-  teamListReducer,
-  teamDetailsReducer,
-  teamDeleteReducer,
-  teamCreateReducer,
-  teamUpdateReducer,
-} from "./reducers/teamReducers";
+
 
 import {
   articleListReducer,
@@ -39,6 +33,15 @@ import {
   userDeleteReducer,
   userUpdateReducer,
 } from "./reducers/userReducers";
+import { fundCreateReducer, fundDeleteReducer, fundListReducer } from "./reducers/fundReducers";
+import {
+  portfolioListReducer,
+  portfolioDetailsReducer,
+  portfolioDeleteReducer,
+  portfolioCreateReducer,
+  portfolioUpdateReducer,
+  portfolioListByClientIdReducer,
+} from "./reducers/portfolioReducers";
 
 const reducer = combineReducers({
   businessList: businessListReducer,
@@ -46,21 +49,10 @@ const reducer = combineReducers({
   businessDelete: businessDeleteReducer,
   businessCreate: businessCreateReducer,
   businessUpdate: businessUpdateReducer,
-  teamList: teamListReducer,
-  teamDetails: teamDetailsReducer,
-  teamDelete: teamDeleteReducer,
-  teamCreate: teamCreateReducer,
-  teamUpdate: teamUpdateReducer,
-  articleList: articleListReducer,
-  articleDetails: articleDetailsReducer,
-  articleDelete: articleDeleteReducer,
-  articleCreate: articleCreateReducer,
-  articleUpdate: articleUpdateReducer,
-  testimonialList: testimonialListReducer,
-  testimonialDetails: testimonialDetailsReducer,
-  testimonialDelete: testimonialDeleteReducer,
-  testimonialCreate: testimonialCreateReducer,
-  testimonialUpdate: testimonialUpdateReducer,
+  fundList: fundListReducer,
+  fundDelete: fundDeleteReducer,
+  fundCreate: fundCreateReducer,
+
   userLogin: userLoginReducer,
   userRegister: userRegisterReducer,
   userDetails: userDetailsReducer,
@@ -68,6 +60,12 @@ const reducer = combineReducers({
   userList: userListReducer,
   userDelete: userDeleteReducer,
   userUpdate: userUpdateReducer,
+  portfolioList: portfolioListReducer,
+  portfolioListByClientId: portfolioListByClientIdReducer,
+  portfolioDetails: portfolioDetailsReducer,
+  portfolioDelete: portfolioDeleteReducer,
+  portfolioCreate: portfolioCreateReducer,
+  portfolioUpdate: portfolioUpdateReducer,
 });
 
 const userInfoFromStorage = localStorage.getItem("userInfo")

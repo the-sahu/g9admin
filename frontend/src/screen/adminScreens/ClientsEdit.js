@@ -14,6 +14,10 @@ const ClientsEdit = ({ history, match }) => {
   const [pan, setPan] = useState("");
   const [demate, setDemate] = useState("");
   const [bankAccount, setBankAccount] = useState("");
+  const [bankName, setBankName] = useState("");
+  const [capital, setCapital] = useState("");
+  const [netProfit, setNetProfit] = useState("");
+  const [netLoss, setnetLoss] = useState("");
   const [segments, setSegments] = useState("");
   const [image, setImage] = useState("");
   const [uploading, setUploading] = useState(false);
@@ -68,6 +72,10 @@ const ClientsEdit = ({ history, match }) => {
         setPan(user.pan);
         setDemate(user.demate);
         setBankAccount(user.bankAccount);
+        setBankName(user.bankName);
+        setCapital(user.capital);
+        setNetProfit(user.netProfit);
+        setnetLoss(user.netLoss);
         setSegments(user.segments);
         setImage(user.image);
         // console.log(description);
@@ -114,6 +122,10 @@ if(userId){
         pan,
         demate,
         bankAccount,
+        bankName,
+        capital,
+        netLoss,
+        netProfit,
         segments,
         image,
         
@@ -129,10 +141,14 @@ else {
           clientId,
           phone,
           pan,
-        demate,
-        bankAccount,
-        segments,
-        image}
+          demate,
+          bankAccount,
+          bankName,
+          capital,
+          netProfit,
+          netLoss,
+          segments,
+          image}
       )
     )
     console.log(name,
@@ -253,6 +269,16 @@ else {
                         />
                       </div>
                       <div className="rounded-md w-full ">
+                        <label>Bank Name</label>
+                        <input
+                          type="text"
+                          value={bankName}
+                          onChange={(e) => setBankName(e.target.value)}
+                          className="appearance-none relative  w-full px-3 py-3 border border-primary-300 placeholder-gray-800 text-primary-900 rounded-md focus:outline-none focus:ring-2 transition duration-200 focus:ring-offset-2 focus:ring-primary-500  focus:z-10 sm:text-base"
+                          placeholder="Please enter bank account name.."
+                        />
+                      </div>
+                      <div className="rounded-md w-full ">
                         <label>Segments</label>
                         <input
                           type="text"
@@ -260,6 +286,36 @@ else {
                           onChange={(e) => setSegments(e.target.value)}
                           className="appearance-none relative  w-full px-3 py-3 border border-primary-300 placeholder-gray-800 text-primary-900 rounded-md focus:outline-none focus:ring-2 transition duration-200 focus:ring-offset-2 focus:ring-primary-500  focus:z-10 sm:text-base"
                           placeholder="Please enter segments.."
+                        />
+                      </div>
+                      <div className="rounded-md w-full ">
+                        <label>Capital Amount</label>
+                        <input
+                          type="number"
+                          value={capital}
+                          onChange={(e) => setCapital(e.target.value)}
+                          className="appearance-none relative  w-full px-3 py-3 border border-primary-300 placeholder-gray-800 text-primary-900 rounded-md focus:outline-none focus:ring-2 transition duration-200 focus:ring-offset-2 focus:ring-primary-500  focus:z-10 sm:text-base"
+                          placeholder="Please enter capital amounts.."
+                        />
+                      </div>
+                      <div className="rounded-md w-full ">
+                        <label>Net Profit</label>
+                        <input
+                          type="number"
+                          value={netProfit}
+                          onChange={(e) => setNetProfit(e.target.value)}
+                          className="appearance-none relative  w-full px-3 py-3 border border-primary-300 placeholder-gray-800 text-primary-900 rounded-md focus:outline-none focus:ring-2 transition duration-200 focus:ring-offset-2 focus:ring-primary-500  focus:z-10 sm:text-base"
+                          placeholder="Please enter netprofit amounts.."
+                        />
+                      </div>
+                      <div className="rounded-md w-full ">
+                        <label>Net Loss</label>
+                        <input
+                          type="number"
+                          value={netLoss}
+                          onChange={(e) => setnetLoss(e.target.value)}
+                          className="appearance-none relative  w-full px-3 py-3 border border-primary-300 placeholder-gray-800 text-primary-900 rounded-md focus:outline-none focus:ring-2 transition duration-200 focus:ring-offset-2 focus:ring-primary-500  focus:z-10 sm:text-base"
+                          placeholder="Please enter netLoss amounts.."
                         />
                       </div>
 
@@ -314,16 +370,18 @@ else {
                       </p>
                     </div>
                      ) : (
-                        <div className="h-96 w-full p-5">
+                        <div className="h-48 w-full pb-6 ">
                           <div
                             className="bg-gray-100 cursor-pointer p-2 w-8 h-8 "
                             onClick={(e) => setImage("")}
                           >
-                            {/* <TrashIcon className="h-5 w-5  mx-auto" /> */}
+                            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 pr-2 w-6 text-red-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                        </svg>
                           </div>
                           <img
                             src={image}
-                            className="h-80 w-auto mx-auto object-cover object-center"
+                            className="h-full w-full  mx-auto object-cover object-center"
                           />
                         </div>
                       )}

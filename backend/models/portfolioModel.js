@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 const portfolio = mongoose.Schema(
   {
     date: {
-      type:  new Date(),
+      type: Date,
       required: true,
     },
     stockName: {
@@ -29,7 +29,7 @@ const portfolio = mongoose.Schema(
     client: {
       type: mongoose.Schema.Types.ObjectId,
       required: true,
-      ref: 'User',
+      ref: "User",
     },
   },
   {

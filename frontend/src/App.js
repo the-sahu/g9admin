@@ -6,6 +6,10 @@ import Footer from './components/Footer';
 import Header from './components/Header';
 import ClientsEdit from './screen/adminScreens/ClientsEdit';
 import ClientsList from './screen/adminScreens/ClientsList';
+import FundRequestScreen from './screen/adminScreens/FundRequestScreen';
+import PortfolioList from './screen/adminScreens/PortfolioList';
+import PortfolioEdit from './screen/adminScreens/PortfolioEdit';
+import ClientPortfolioList from './screen/adminScreens/ClientPortfolioList';
 import Dashboard from './screen/Dashboard';
 import DemateScreen from './screen/DemateScreen';
 import LoginScreen from './screen/LoginScreen';
@@ -17,8 +21,27 @@ import Withdraw from './screen/Withdraw';
 const defaultScreens = () => (
   <>
     <Header />
+      <Route path="/fundslist"  component={FundRequestScreen} exact/>
       <Route path="/client"  component={ClientsList} exact/>
       <Route path="/client/:id/edit"  component={ClientsEdit} exact/>
+
+      <Route path="/admin/portfolio" component={PortfolioList} exact />
+    <Route
+      path="/admin/portfolio/:clientId"
+      component={ClientPortfolioList}
+      exact
+    />
+    <Route
+      path="/admin/portfolio/:clientId/edit/:id"
+      component={PortfolioEdit}
+      exact
+    />
+    <Route
+      path="/admin/addportfolio/:clientId"
+      component={PortfolioEdit}
+      exact
+    />
+    
       <Route path="/addclients"  component={ClientsEdit} exact/>
    
     <Route path="/dashboard"  component={Dashboard} exact/>

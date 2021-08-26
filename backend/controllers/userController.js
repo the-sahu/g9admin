@@ -40,6 +40,10 @@ const registerUser = asyncHandler(async (req, res) => {
         pan,
         demate,
         bankAccount,
+        bankName,
+        capital,
+        netProfit,
+        netLoss,
         segments,
         image } = req.body;
 
@@ -59,6 +63,10 @@ const registerUser = asyncHandler(async (req, res) => {
           pan,
           demate,
           bankAccount,
+          bankName,
+          capital,
+          netProfit,
+          netLoss,
           segments,
           image
   });
@@ -174,24 +182,46 @@ const getUserById = asyncHandler(async (req, res) => {
 // @route   PUT /api/users/:id
 // @access  Private/Admin
 const updateUser = asyncHandler(async (req, res) => {
-  const user = await User.findById(req.params.id);
+  try {
+    const user = await User.findById(req.params.id);
+    const {
+      name,
+      email,
+      password,
+      clientId,
+      phone,
+      pan,
+      demate,
+      bankAccount,
+      bankName,
+      capital,
+      netLoss,
+      netProfit,
+      segments,
+      image, } = req.body;
 
-  if (user) {
-    user.name = req.body.name || user.name;
-    user.email = req.body.email || user.email;
-    user.isAdmin = req.body.isAdmin;
-
-    const updatedUser = await user.save();
-
-    res.json({
-      _id: updatedUser._id,
-      name: updatedUser.name,
-      email: updatedUser.email,
-      isAdmin: updatedUser.isAdmin,
-    });
-  } else {
-    res.status(404);
-    throw new Error("User not found");
+    if (user) {
+      user.name = name;
+      user.email = email;
+      user.password = password;
+      user.clientId = clientId;
+      user.phone = phone;
+      user.pan = pan;
+      user.demate = demate;
+      user.bankAccount = bankAccount;
+      user.bankName = bankName;
+      user.capital = capital;
+      user.netProfit = netProfit;
+      user.netLoss = netLoss;
+      user.segments = segments;
+      
+      user.image = image;
+    }
+    const updatedTeam = await user.save();
+    console.log(updatedTeam);
+    res.status(201).send("User Successfully Updated");
+  } catch (error) {
+    res.status(400).send(error.message);
   }
 });
 

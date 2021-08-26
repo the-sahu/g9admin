@@ -41,6 +41,18 @@ const userSchema = mongoose.Schema(
     bankAccount: {
       type: String,
     },
+    bankName: {
+      type: String,
+    },
+    capital: {
+      type: String,
+    },
+    netProfit: {
+      type: String,
+    },
+    netLoss: {
+      type: String,
+    },
     segments: [{
       type: String,
     }],

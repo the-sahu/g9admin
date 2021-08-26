@@ -11,11 +11,7 @@ const fundAddSchema = mongoose.Schema(
       type: String,
       required: true,
     },
-    mobileNumber: {
-      type: Number,
-      required: true,
-    },
-    accountNumber: {
+    phone: {
       type: Number,
       required: true,
     },
@@ -23,11 +19,15 @@ const fundAddSchema = mongoose.Schema(
       type: Number,
       required: true,
     },
-    client: {
-      type: mongoose.Schema.Types.ObjectId,
+    bankAccount: {
+      type: Number,
       required: true,
-      ref: 'User',
     },
+    // client: {
+    //   type: mongoose.Schema.Types.ObjectId,
+    //   required: true,
+    //   ref: 'User',
+    // },
   },
   {
     timestamps: true,

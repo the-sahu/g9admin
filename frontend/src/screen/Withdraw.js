@@ -1,7 +1,35 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
-
-const Withdraw = () => {
+import React , {useEffect,useState} from 'react'
+import { useDispatch, useSelector } from "react-redux";
+import 'react-responsive-modal/styles.css';
+import { getUserDetails } from '../actions/userActions';
+const Withdraw = ({ history, match }) => {
+    
+  const dispatch = useDispatch();
+  
+  
+  const userLogin = useSelector((state) => state.userLogin);
+  const { userInfo } = userLogin;
+//   console.log(userInfo);
+  
+  const userId = userInfo._id;
+  
+  const userDetails = useSelector((state) => state.userDetails);
+  const { loading, error, user } = userDetails;
+  
+  useEffect(() => {
+      if (!userInfo) {
+          history.push("/login");
+        }
+        
+        else {
+            if(user._id !== userId) 
+            dispatch(getUserDetails(userId));
+            
+        }
+        console.log(user);
+    // console.log(tags);
+    
+  }, [dispatch, userId, user,userInfo]);
     return (
         <div>
             {/* withdraw form start */}
@@ -19,7 +47,7 @@ const Withdraw = () => {
                             
                             <div className="">
                                 <label for="name" className="  pb-5 text-black text-sm  transition-all ">Clint ID</label>
-                                <input autocomplete="off" id="name" name="name" type="text" className="peer rounded-lg pl-2 h-10 w-full border-2 border-primary-500 text-gray-900 focus:outline-none " placeholder="e.g. DJ153S" />
+                                <input autocomplete="off" id="name" name="name" type="text" className="peer rounded-lg pl-2 h-10 w-full border-2 border-primary-500 text-gray-900 focus:outline-none " value={user.clientId} disabled placeholder="e.g. DJ153S" />
                             </div>
                             <div className="">
                                 <label for="name" className="  pb-5 text-black text-sm  transition-all ">Enter OTP</label>
@@ -31,7 +59,7 @@ const Withdraw = () => {
                             </div>
                             <div className="">
                                 <label for="number" className="  pb-5 text-black text-sm  transition-all ">Account Number</label>
-                                <input autocomplete="off" id="name" name="name" type="text" className="peer rounded-lg pl-2 h-10 w-full border-2 border-primary-500 text-gray-900 focus:outline-none " placeholder="Enter Ac No. " />
+                                <input autocomplete="off" id="name" name="name" type="text" className="peer rounded-lg pl-2 h-10 w-full border-2 border-primary-500 text-gray-900 focus:outline-none " value={user.bankAccount} disabled placeholder="Enter Ac No. " />
                             </div>
                             <div className="">
                                 <label for="number" className="  pb-5 text-black text-sm  transition-all ">Amount</label>
