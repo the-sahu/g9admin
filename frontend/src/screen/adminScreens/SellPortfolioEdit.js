@@ -1,14 +1,13 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  getPortfolioDetails,
-  updatePortfolio,
-  createPortfolio,
-} from "../../actions/portfolioActions";
-import { PORTFOLIO_UPDATE_RESET } from "../../constants/portfolioConstants";
+// import { getPortfolioDetails } from "../../actions/portfolioActions";
+import { createSellPortfolio, getSellPortfolioDetails, updateSellPortfolio } from "../../actions/sellPortfolioActions";
+import { SELL_PORTFOLIO_UPDATE_RESET } from "../../constants/sellPortfolioConstants";
 
-const PortfolioEdit = ({ history, match }) => {
+
+
+const SellPortfolioEdit = ({ history, match }) => {
   const [date, setDate] = useState(new Date());
   const [stockName, setStockName] = useState("");
   const [buyPrice, setBuyPrice] = useState(0);
@@ -20,26 +19,26 @@ const PortfolioEdit = ({ history, match }) => {
 
   const portfolioId = match.params.id;
   const client = match.params.clientId;
-  // console.log(portfolioId);
+  console.log(portfolioId);
 
-  const portfolioCreate = useSelector((state) => state.portfolioCreate);
+  const sellportfolioCreate = useSelector((state) => state.sellportfolioCreate);
   const {
     loading: loadingCreate,
     error: createError,
     success: successCreate,
-    portfolio: createdPortfolio,
-  } = portfolioCreate;
+    sellportfolio: sellportfolioCreated,
+  } = sellportfolioCreate;
 
-  const portfolioDetails = useSelector((state) => state.portfolioDetails);
-  const { loading, error, portfolio } = portfolioDetails;
-  // console.log(portfolio);
+  const sellportfolioDetails = useSelector((state) => state.sellportfolioDetails);
+  const { loading, error, sellportfolio } = sellportfolioDetails;
+  console.log(sellportfolio);
 
-  const portfolioUpdate = useSelector((state) => state.portfolioUpdate);
+  const sellportfolioUpdate = useSelector((state) => state.sellportfolioUpdate);
   const {
     loading: loadingUpdate,
     error: errorUpdate,
     success: successUpdate,
-  } = portfolioUpdate;
+  } = sellportfolioUpdate;
 
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
@@ -48,22 +47,22 @@ const PortfolioEdit = ({ history, match }) => {
     if (!userInfo) {
       history.push("/login");
     }
-    if (createdPortfolio) {
-      history.push("/admin/portfolio");
+    if (sellportfolioCreated) {
+      history.push("/admin/sellportfolio");
     }
     if (successUpdate) {
-      dispatch({ type: PORTFOLIO_UPDATE_RESET });
-      history.push("/admin/portfolio");
+      dispatch({ type: SELL_PORTFOLIO_UPDATE_RESET });
+      history.push("/admin/sellportfolio");
     } else {
-      if (portfolio._id !== portfolioId) {
-        dispatch(getPortfolioDetails(portfolioId));
+      if (sellportfolio._id !== portfolioId) {
+        dispatch(getSellPortfolioDetails(portfolioId));
       } else {
-        setDate(portfolio.date);
-        setStockName(portfolio.stockName);
-        setBuyPrice(portfolio.buyPrice);
-        setBuyQty(portfolio.buyQty);
-        setSellQty(portfolio.sellQty);
-        setSellPrice(portfolio.sellPrice);
+        setDate(sellportfolio.date);
+        setStockName(sellportfolio.stockName);
+        setBuyPrice(sellportfolio.buyPrice);
+        setBuyQty(sellportfolio.buyQty);
+        setSellQty(sellportfolio.sellQty);
+        setSellPrice(sellportfolio.sellPrice);
       }
     }
     // console.log(tags);
@@ -72,7 +71,7 @@ const PortfolioEdit = ({ history, match }) => {
     dispatch,
     history,
     portfolioId,
-    portfolio,
+    sellportfolio,
     successCreate,
     userInfo,
     successUpdate,
@@ -82,7 +81,7 @@ const PortfolioEdit = ({ history, match }) => {
     e.preventDefault();
     if (portfolioId) {
       dispatch(
-        updatePortfolio({
+        updateSellPortfolio({
           _id: portfolioId,
           date,
           stockName,
@@ -104,7 +103,7 @@ const PortfolioEdit = ({ history, match }) => {
       //   client
       // );
       dispatch(
-        createPortfolio({
+        createSellPortfolio({
           date,
           stockName,
           buyPrice,
@@ -121,7 +120,7 @@ const PortfolioEdit = ({ history, match }) => {
     <div className=" bg-green-50 pb-24">
       <div className="py-5">
         <h1 className="text-center text-xl md:text-3xl text-primary-500 font-semibold">
-          Portfolio Buy to Sell
+          Portfolio Sell to Buy
          </h1>
         <div className="h-px max-w-md my-2 bg-primary-300 mx-auto"></div>
       </div>
@@ -211,4 +210,4 @@ const PortfolioEdit = ({ history, match }) => {
   );
 };
 
-export default PortfolioEdit;
+export default SellPortfolioEdit;

@@ -1,21 +1,21 @@
 import mongoose from "mongoose";
 
-const withdawalSchema = mongoose.Schema(
+const fundWithdrawSchema = mongoose.Schema(
   {
   
     clientId: {
       type: String,
       required: true,
     },
-    OTP: {
+    otp: {
       type: Number,
       required: true,
     },
-    contactNumber: {
+    number: {
       type: Number,
       required: true,
     },
-    accountNumber: {
+    bankAccount: {
       type: Number,
       required: true,
     },
@@ -23,17 +23,13 @@ const withdawalSchema = mongoose.Schema(
       type: Number,
       required: true,
     },
-    client: {
-      type: mongoose.Schema.Types.ObjectId,
-      required: true,
-      ref: 'User',
-    },
+
   },
   {
     timestamps: true,
   }
 );
 
-const Withdraw = mongoose.model("Withdraw", withdawalSchema);
+const FundWithdraw = mongoose.model("FundWithdraw", fundWithdrawSchema);
 
-export default Withdraw;
+export default FundWithdraw;

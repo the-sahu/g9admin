@@ -17,18 +17,34 @@ import PortfolioScreen from './screen/PortfolioScreen';
 import ProfileScreen from './screen/ProfileScreen';
 import QrCode from './screen/QrCode';
 import Withdraw from './screen/Withdraw';
+import WithdrawRequestScreen from './screen/adminScreens/WithdrawRequestScreen';
+import SellPortfolioList from './screen/adminScreens/SellPortfolioList';
+import ClientSellPortfolioList from './screen/adminScreens/ClientSellPortfolioList';
+import SellPortfolioEdit from './screen/adminScreens/SellPortfolioEdit';
 
 const defaultScreens = () => (
   <>
     <Header />
       <Route path="/fundslist"  component={FundRequestScreen} exact/>
+      <Route path="/withdrawrequest"  component={WithdrawRequestScreen} exact/>
       <Route path="/client"  component={ClientsList} exact/>
       <Route path="/client/:id/edit"  component={ClientsEdit} exact/>
 
+      <Route path="/admin/sellportfolio" component={SellPortfolioList} exact />
       <Route path="/admin/portfolio" component={PortfolioList} exact />
+    <Route
+      path="/admin/sellportfolio/:clientId"
+      component={ClientSellPortfolioList}
+      exact
+    />
     <Route
       path="/admin/portfolio/:clientId"
       component={ClientPortfolioList}
+      exact
+    />
+    <Route
+      path="/admin/sellportfolio/:clientId/edit/:id"
+      component={SellPortfolioEdit}
       exact
     />
     <Route
@@ -39,6 +55,11 @@ const defaultScreens = () => (
     <Route
       path="/admin/addportfolio/:clientId"
       component={PortfolioEdit}
+      exact
+    />
+    <Route
+      path="/admin/selladdportfolio/:clientId"
+      component={SellPortfolioEdit}
       exact
     />
     

@@ -1,29 +1,7 @@
 import { createStore, combineReducers, applyMiddleware } from "redux";
 import thunk from "redux-thunk";
 import { composeWithDevTools } from "redux-devtools-extension";
-import {
-  businessListReducer,
-  businessDetailsReducer,
-  businessDeleteReducer,
-  businessCreateReducer,
-  businessUpdateReducer,
-} from "./reducers/businessReducers";
 
-
-import {
-  articleListReducer,
-  articleDetailsReducer,
-  articleDeleteReducer,
-  articleCreateReducer,
-  articleUpdateReducer,
-} from "./reducers/articleReducers";
-import {
-  testimonialListReducer,
-  testimonialDetailsReducer,
-  testimonialDeleteReducer,
-  testimonialCreateReducer,
-  testimonialUpdateReducer,
-} from "./reducers/testimonialReducers";
 import {
   userLoginReducer,
   userRegisterReducer,
@@ -42,17 +20,24 @@ import {
   portfolioUpdateReducer,
   portfolioListByClientIdReducer,
 } from "./reducers/portfolioReducers";
+import { withdrawFundCreateReducer,
+         withdrawFundDeleteReducer,
+          withdrawFundListReducer } from "./reducers/withdrawFundReducers";
+import { sellPortfolioCreateReducer,
+  sellPortfolioDeleteReducer,
+  sellPortfolioDetailsReducer,
+  sellPortfolioListByClientIdReducer,
+  sellPortfolioListReducer, 
+  sellPortfolioUpdateReducer} from "./reducers/sellPortfolioReducers";
 
 const reducer = combineReducers({
-  businessList: businessListReducer,
-  businessDetails: businessDetailsReducer,
-  businessDelete: businessDeleteReducer,
-  businessCreate: businessCreateReducer,
-  businessUpdate: businessUpdateReducer,
+
   fundList: fundListReducer,
   fundDelete: fundDeleteReducer,
   fundCreate: fundCreateReducer,
-
+  withdrawFundCreate: withdrawFundCreateReducer,
+  withdrawFundDelete:withdrawFundDeleteReducer,
+  withdrawFundList:withdrawFundListReducer,
   userLogin: userLoginReducer,
   userRegister: userRegisterReducer,
   userDetails: userDetailsReducer,
@@ -61,6 +46,17 @@ const reducer = combineReducers({
   userDelete: userDeleteReducer,
   userUpdate: userUpdateReducer,
   portfolioList: portfolioListReducer,
+  portfolioListByClientId: portfolioListByClientIdReducer,
+  portfolioDetails: portfolioDetailsReducer,
+  portfolioDelete: portfolioDeleteReducer,
+  portfolioCreate: portfolioCreateReducer,
+  portfolioUpdate: portfolioUpdateReducer,
+  sellportfolioList: sellPortfolioListReducer,
+  sellportfolioCreate:sellPortfolioCreateReducer,
+  sellportfolioDelete:sellPortfolioDeleteReducer,
+  sellportfolioDetails:sellPortfolioDetailsReducer,
+  sellportfolioListByClientId:sellPortfolioListByClientIdReducer,
+  sellportfolioUpdate:sellPortfolioUpdateReducer,
   portfolioListByClientId: portfolioListByClientIdReducer,
   portfolioDetails: portfolioDetailsReducer,
   portfolioDelete: portfolioDeleteReducer,

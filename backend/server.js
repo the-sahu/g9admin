@@ -9,8 +9,10 @@ import connectDB from "./config/db.js";
 
 import userRoutes from "./routes/userRoutes.js";
 import fundstRoutes from "./routes/fundsRoutes.js";
+import withdrawFundstRoutes from "./routes/withdrawFundsRoutes.js";
 import uploadRoutes from "./routes/uploadRoutes.js";
 import portfolioRoutes from "./routes/portfolioRoutes.js";
+import sellPortfolioRoutes from "./routes/sellPortfolioRoutes.js";
 
 
 dotenv.config();
@@ -25,8 +27,10 @@ if (process.env.NODE_ENV === "development") {
 
 app.use(express.json());
 
+app.use("/api/sellportfolio", sellPortfolioRoutes);
 app.use("/api/portfolio", portfolioRoutes);
 app.use("/api/funds", fundstRoutes);
+app.use("/api/withdraw", withdrawFundstRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/upload", uploadRoutes);
 

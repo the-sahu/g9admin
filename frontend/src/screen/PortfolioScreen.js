@@ -9,6 +9,7 @@ import {
   listPortfolioByClientId,
 } from "../actions/portfolioActions";
 import { getUserDetails } from "../actions/userActions";
+import { listSellPortfolioByClientId } from "../actions/sellPortfolioActions";
 
 const PortfolioScreen = ({ history }) => {
   const dispatch = useDispatch();
@@ -25,11 +26,15 @@ const PortfolioScreen = ({ history }) => {
 
   const portfolioList = useSelector((state) => state.portfolioListByClientId);
   const { loading, error, clientPortfolios } = portfolioList;
-  // console.log(clientPortfolios);
+
+  const sellportfolioList = useSelector((state) => state.sellportfolioListByClientId);
+  const {  clientSellPortfolios } = sellportfolioList;
+  // console.log(clientSellPortfolios);
 
   useEffect(() => {
     if (userInfo) {
       dispatch(listPortfolioByClientId(userInfo._id));
+      dispatch(listSellPortfolioByClientId(userInfo._id));
     } else {
       history.push("/");
     }
@@ -174,52 +179,32 @@ const PortfolioScreen = ({ history }) => {
               </tr>
             </thead>
             <tbody class="">
-              <tr>
+              {clientSellPortfolios && clientSellPortfolios.map((sellportfolio ,index) => (
+              <tr key={sellportfolio._id}>
                 <td class="  py-3 w-24 pl-1 text-center text-wrap border border-gray-700 text-xs font-brand tracking-wide">
-                  1
+                  {++index}
                 </td>
                 <td class="  py-3 w-24 pl-1 text-center text-wrap border border-gray-700 text-xs font-brand tracking-wide">
-                  19-08-2021
+                <Moment format="L">{sellportfolio.date}</Moment>
                 </td>
                 <td class="  py-3 w-24 pl-1 text-center p-0 text-wrap border border-gray-700 text-xs font-brand tracking-wide">
-                  HDFC Bank sbi bank
+                  {sellportfolio.stockName}
                 </td>
                 <td class="  py-3 w-24 pl-1 text-center text-wrap border border-gray-700 text-xs font-brand tracking-wide">
-                  1125
+                  {sellportfolio.sellPrice}
                 </td>
                 <td class="  py-3 w-24 pl-1 text-center text-wrap border border-gray-700 text-xs font-brand tracking-wide">
-                  150
+                  {sellportfolio.sellQty}
                 </td>
                 <td class="  py-3 w-24 pl-1 text-center text-wrap border border-gray-700 text-xs font-brand tracking-wide">
-                  21
+                  {sellportfolio.buyQty}
                 </td>
                 <td class="  py-3 w-24 pl-1 text-center text-wrap border border-gray-700 text-xs font-brand tracking-wide">
-                  1235
+                  {sellportfolio.buyPrice}
                 </td>
               </tr>
-              <tr>
-                <td class="  py-3 w-24 pl-1 text-center text-wrap border border-gray-700 text-xs font-brand tracking-wide">
-                  2
-                </td>
-                <td class="  py-3 w-24 pl-1 text-center text-wrap border border-gray-700 text-xs font-brand tracking-wide">
-                  19-08-2021
-                </td>
-                <td class="  py-3 w-24 pl-1 text-center text-wrap border border-gray-700 text-xs font-brand tracking-wide">
-                  HDFC Bank
-                </td>
-                <td class="  py-3 w-24 pl-1 text-center text-wrap border border-gray-700 text-xs font-brand tracking-wide">
-                  1125
-                </td>
-                <td class="  py-3 w-24 pl-1 text-center text-wrap border border-gray-700 text-xs font-brand tracking-wide">
-                  150
-                </td>
-                <td class="  py-3 w-24 pl-1 text-center text-wrap border border-gray-700 text-xs font-brand tracking-wide">
-                  21
-                </td>
-                <td class="  py-3 w-24 pl-1 text-center text-wrap border border-gray-700 text-xs font-brand tracking-wide">
-                  1235
-                </td>
-              </tr>
+              ))}
+
             </tbody>
           </table>
         </div>

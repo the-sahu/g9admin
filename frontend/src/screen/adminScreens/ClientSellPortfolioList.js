@@ -7,22 +7,22 @@ import Moment from "react-moment";
 import "react-responsive-modal/styles.css";
 import { Modal } from "react-responsive-modal";
 import {
-  deletePortfolio,
-  listPortfolioByClientId,
-} from "../../actions/portfolioActions";
+  deleteSellPortfolio,
+  listSellPortfolioByClientId,
+} from "../../actions/sellPortfolioActions";
 
-const ClientPortfolioList = ({ history, match }) => {
+const ClientSellPortfolioList = ({ history, match }) => {
   const [open, setOpen] = useState(false);
 
   const dispatch = useDispatch();
   const clientId = match.params.clientId;
 
-  const portfolioList = useSelector((state) => state.portfolioListByClientId);
-  const { loading, error, clientPortfolios } = portfolioList;
-  console.log(clientPortfolios);
+  const sellportfolioList = useSelector((state) => state.sellportfolioListByClientId);
+  const { loading, error, clientSellPortfolios } = sellportfolioList;
+  console.log(clientSellPortfolios);
 
-  const portfolioDelete = useSelector((state) => state.portfolioDelete);
-  const { success: successDelete } = portfolioDelete;
+  const sellportfolioDelete = useSelector((state) => state.sellportfolioDelete);
+  const { success: successDelete } = sellportfolioDelete;
 
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
@@ -32,7 +32,7 @@ const ClientPortfolioList = ({ history, match }) => {
     console.log(clientId);
 
     if (userInfo) {
-      dispatch(listPortfolioByClientId(clientId));
+      dispatch(listSellPortfolioByClientId(clientId));
     } else {
       history.push("/");
     }
@@ -42,14 +42,14 @@ const ClientPortfolioList = ({ history, match }) => {
   const onCloseModal = () => setOpen(false);
 
   const deleteHandler = (id) => {
-    dispatch(deletePortfolio(id));
+    dispatch(deleteSellPortfolio(id));
   };
 
   return (
     <div className="bg-primary-50 pb-24">
       <div className="px-5 py-5">
         <Link
-          to={`/admin/addportfolio/${clientId}`}
+          to={`/admin/selladdportfolio/${clientId}`}
           class="flex items-center w-32  justify-center px-2 h-10  font-medium tracking-wide text-white transition duration-200 rounded shadow-md bg-black  focus:shadow-outline focus:outline-none"
           aria-label="Sign up"
           title="Sign up"
@@ -89,8 +89,8 @@ const ClientPortfolioList = ({ history, match }) => {
             </tr>
           </thead>
           <tbody class="w-full">
-            {clientPortfolios &&
-              clientPortfolios.map((client) => (
+            {clientSellPortfolios &&
+              clientSellPortfolios.map((client) => (
                 <tr key={client._id}>
                   <td class="  py-3 w-24 pl-1 text-center text-wrap border border-gray-700 text-xs font-brand tracking-wide">
                     {client.stockName}
@@ -116,6 +116,7 @@ const ClientPortfolioList = ({ history, match }) => {
                       </svg>
                     </Link>
 
+                
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       className="h-6 w-6 text-red-700"
@@ -142,4 +143,4 @@ const ClientPortfolioList = ({ history, match }) => {
   );
 };
 
-export default ClientPortfolioList;
+export default ClientSellPortfolioList;

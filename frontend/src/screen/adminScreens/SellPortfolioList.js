@@ -1,38 +1,31 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import moment from "moment";
-import Moment from "react-moment";
 
 import "react-responsive-modal/styles.css";
 import { Modal } from "react-responsive-modal";
-import {
-  deletePortfolio,
-  listPortfolioByClientId,
-} from "../../actions/portfolioActions";
+import { deleteUser, listUsers } from "../../actions/userActions";
 
-const ClientPortfolioList = ({ history, match }) => {
+const SellPortfolioList = ({ history }) => {
   const [open, setOpen] = useState(false);
 
   const dispatch = useDispatch();
-  const clientId = match.params.clientId;
 
-  const portfolioList = useSelector((state) => state.portfolioListByClientId);
-  const { loading, error, clientPortfolios } = portfolioList;
-  console.log(clientPortfolios);
+  const userList = useSelector((state) => state.userList);
+  const { loading, error, users } = userList;
+  console.log(users);
 
-  const portfolioDelete = useSelector((state) => state.portfolioDelete);
-  const { success: successDelete } = portfolioDelete;
+  const userDelete = useSelector((state) => state.userDelete);
+  const { success: successDelete } = userDelete;
 
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
 
   useEffect(() => {
     // dispatch({type:CAREER_CREATE_RESET})
-    console.log(clientId);
 
     if (userInfo) {
-      dispatch(listPortfolioByClientId(clientId));
+      dispatch(listUsers());
     } else {
       history.push("/");
     }
@@ -42,46 +35,21 @@ const ClientPortfolioList = ({ history, match }) => {
   const onCloseModal = () => setOpen(false);
 
   const deleteHandler = (id) => {
-    dispatch(deletePortfolio(id));
+    dispatch(deleteUser(id));
   };
 
   return (
     <div className="bg-primary-50 pb-24">
-      <div className="px-5 py-5">
-        <Link
-          to={`/admin/addportfolio/${clientId}`}
-          class="flex items-center w-32  justify-center px-2 h-10  font-medium tracking-wide text-white transition duration-200 rounded shadow-md bg-black  focus:shadow-outline focus:outline-none"
-          aria-label="Sign up"
-          title="Sign up"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="h-6 w-6 mr-2"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"
-            />
-          </svg>
-          New
-        </Link>
-      </div>
-
-      {/* table section start */}
+     
       <div className="mb-6 px-1 overflow-x-auto w-full">
         <table class="mt-2 overflow-x-auto  mx-auto">
           <thead class=" text-white bg-primary-500">
             <tr>
               <th class="   truncate w-24 pl-2 uppercase text-left py-3 text-wrap   font-brand  font-bold text-xs border-gray-900 border">
-                Stock Name
+                Client Name
               </th>
               <th class="   truncate w-24 pl-2 uppercase text-left py-3 text-wrap   font-brand  font-bold text-xs border-gray-900 border">
-                Date
+                ClientId
               </th>
               <th class="   truncate w-24 pl-2 uppercase text-left py-3 text-wrap   font-brand  font-bold text-xs border-gray-900 border">
                 Action
@@ -89,17 +57,17 @@ const ClientPortfolioList = ({ history, match }) => {
             </tr>
           </thead>
           <tbody class="w-full">
-            {clientPortfolios &&
-              clientPortfolios.map((client) => (
+            {users &&
+              users.map((client) => (
                 <tr key={client._id}>
                   <td class="  py-3 w-24 pl-1 text-center text-wrap border border-gray-700 text-xs font-brand tracking-wide">
-                    {client.stockName}
+                    {client.name}
                   </td>
                   <td class="  py-3 w-24 pl-1 text-center p-0 text-wrap border border-gray-700 text-xs font-brand tracking-wide">
-                    <Moment format="L">{client.date}</Moment>
+                    {client.clientId}
                   </td>
                   <td class=" flex justify-between py-3 w-24 px-4 text-center p-0 text-wrap border border-gray-700 text-xs font-brand tracking-wide">
-                    <Link to={`edit/${client._id}`}>
+                    <Link to={`sellportfolio/${client._id}/`}>
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         className="h-6 w-6"
@@ -115,22 +83,6 @@ const ClientPortfolioList = ({ history, match }) => {
                         />
                       </svg>
                     </Link>
-
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="h-6 w-6 text-red-700"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                      onClick={() => deleteHandler(client._id)}
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
-                      />
-                    </svg>
                   </td>
                 </tr>
               ))}
@@ -142,4 +94,4 @@ const ClientPortfolioList = ({ history, match }) => {
   );
 };
 
-export default ClientPortfolioList;
+export default SellPortfolioList;

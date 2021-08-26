@@ -1,4 +1,5 @@
 import React from 'react'
+import Logo from '../logo.png'
 import { Link } from 'react-router-dom'
 import { logout } from "../actions/userActions";
 import { useDispatch, useSelector } from "react-redux";
@@ -17,7 +18,7 @@ const Header = () => {
             <div className="px-3 flex flex-row justify-between py-2 shadow">
                 <div>
                     <Link to="/dashboard">
-                    <img src="logo.png" className="h-12" alt=""/>
+                    <img src={Logo} className="h-12" alt=""/>
                     </Link>
                 </div>
                 
