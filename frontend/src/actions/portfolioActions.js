@@ -187,6 +187,7 @@ export const updatePortfolio = (portfolio) => async (dispatch, getState) => {
     const config = {
       headers: {
         "Content-Type": "application/json",
+        "x-Trigger": "CORS",
         Authorization: `Bearer ${userInfo.token}`,
       },
     };

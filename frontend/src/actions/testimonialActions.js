@@ -159,6 +159,7 @@ export const updateTestimonial =
       const config = {
         headers: {
           "Content-Type": "application/json",
+          "x-Trigger": "CORS",
           Authorization: `Bearer ${userInfo.token}`,
         },
       };

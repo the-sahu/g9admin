@@ -40,6 +40,7 @@ export const login = (clientId, password) => async (dispatch) => {
     const config = {
       headers: {
         "Content-Type": "application/json",
+        "x-Trigger": "CORS",
       },
     };
 
@@ -83,6 +84,7 @@ export const register = (client) => async (dispatch) => {
     const config = {
       headers: {
         "Content-Type": "application/json",
+        "x-Trigger": "CORS",
       },
     };
 
@@ -144,6 +146,7 @@ export const updateUserProfile = (user) => async (dispatch, getState) => {
     const config = {
       headers: {
         "Content-Type": "application/json",
+        "x-Trigger": "CORS",
         Authorization: `Bearer ${userInfo.token}`,
       },
     };
@@ -258,6 +261,7 @@ export const updateUser = (user) => async (dispatch, getState) => {
     const config = {
       headers: {
         "Content-Type": "application/json",
+        "x-Trigger": "CORS",
         Authorization: `Bearer ${userInfo.token}`,
       },
     };
