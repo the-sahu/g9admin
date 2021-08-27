@@ -1,18 +1,18 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
 import "react-responsive-modal/styles.css";
-import { Modal } from "react-responsive-modal";
-import { deleteUser, listUsers } from "../../actions/userActions";
+
+import { listUsers } from "../../actions/userActions";
 
 const SellPortfolioList = ({ history }) => {
-  const [open, setOpen] = useState(false);
+  
 
   const dispatch = useDispatch();
 
   const userList = useSelector((state) => state.userList);
-  const { loading, error, users } = userList;
+  const {  users } = userList;
   console.log(users);
 
   const userDelete = useSelector((state) => state.userDelete);
@@ -31,12 +31,7 @@ const SellPortfolioList = ({ history }) => {
     }
   }, [dispatch, history, userInfo, successDelete]);
 
-  const onOpenModal = () => setOpen(true);
-  const onCloseModal = () => setOpen(false);
 
-  const deleteHandler = (id) => {
-    dispatch(deleteUser(id));
-  };
 
   return (
     <div className="bg-primary-50 pb-24">

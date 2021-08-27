@@ -116,7 +116,7 @@ const ProfileScreen = ({ history, match }) => {
                     <p className="text-lg text-primary-500 font-semibold px-4 py-4 ">Bank Accounts</p>
                 
                 <div className="flex justify-between px-4  ">
-                    <p className="text-lg">State Bank Of India</p>
+                    <p className="text-lg">{user.bankName}</p>
                     <p className="text-base font-semibold">{user.bankAccount}</p>
                 </div>
             </div>

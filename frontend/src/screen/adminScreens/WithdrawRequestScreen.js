@@ -41,7 +41,7 @@ const WithdrawRequestScreen = ({history}) => {
 
     return (
         <div className="bg-primary-50 pb-24">
-            <h1 className="text-xl text-center pt-5 font-semibold">All Fund add Request</h1>
+            <h1 className="text-xl text-center pt-5 font-semibold">All Withdraw funds  Request</h1>
         {/* table section start */}
         <div className="mb-6 px-1 overflow-x-auto w-full">
           <table class="mt-10 overflow-x-auto  mx-auto">

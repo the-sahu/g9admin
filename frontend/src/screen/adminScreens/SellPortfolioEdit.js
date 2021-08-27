@@ -1,4 +1,4 @@
-import axios from "axios";
+
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 // import { getPortfolioDetails } from "../../actions/portfolioActions";
@@ -23,20 +23,18 @@ const SellPortfolioEdit = ({ history, match }) => {
 
   const sellportfolioCreate = useSelector((state) => state.sellportfolioCreate);
   const {
-    loading: loadingCreate,
-    error: createError,
+
     success: successCreate,
     sellportfolio: sellportfolioCreated,
   } = sellportfolioCreate;
 
   const sellportfolioDetails = useSelector((state) => state.sellportfolioDetails);
-  const { loading, error, sellportfolio } = sellportfolioDetails;
+  const { sellportfolio } = sellportfolioDetails;
   console.log(sellportfolio);
 
   const sellportfolioUpdate = useSelector((state) => state.sellportfolioUpdate);
   const {
-    loading: loadingUpdate,
-    error: errorUpdate,
+
     success: successUpdate,
   } = sellportfolioUpdate;
 
