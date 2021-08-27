@@ -3,11 +3,16 @@ import { FUNDS_CREATE_FAIL, FUNDS_CREATE_REQUEST, FUNDS_CREATE_SUCCESS, FUNDS_DE
 
 import { logout } from "./userActions";
 
+const axiosInstance = axios.create({
+  baseURL:process.env.REACT_APP_API_URL,
+})
+
+
 export const listFund = () => async (dispatch) => {
   try {
     dispatch({ type: FUNDS_LIST_REQUEST });
 
-    const { data } = await axios.get(`/api/funds`);
+    const { data } = await axiosInstance.get(`/api/funds`);
     // console.log(data);
     // return;
 
@@ -42,7 +47,7 @@ export const deleteFund = (id) => async (dispatch, getState) => {
       },
     };
 
-    await axios.delete(`/api/funds/${id}`, config);
+    await axiosInstance.delete(`/api/funds/${id}`, config);
 
     dispatch({
       type: FUNDS_DELETE_SUCCESS,
@@ -78,7 +83,7 @@ export const createFunds = (funds) => async (dispatch, getState) => {
       },
     };
 
-    const { data } = await axios.post(`/api/funds`, funds, config);
+    const { data } = await axiosInstance.post(`/api/funds`, funds, config);
 
     dispatch({
       type: FUNDS_CREATE_SUCCESS,

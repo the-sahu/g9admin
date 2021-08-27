@@ -3,11 +3,16 @@ import { SELL_PORTFOLIO_CREATE_FAIL, SELL_PORTFOLIO_CREATE_REQUEST, SELL_PORTFOL
 
 import { logout } from "./userActions";
 
+const axiosInstance = axios.create({
+  baseURL:process.env.REACT_APP_API_URL,
+})
+
+
 export const listSellPortfolios = () => async (dispatch) => {
   try {
     dispatch({ type: SELL_PORTFOLIO_LIST_REQUEST });
 
-    const { data } = await axios.get(`/api/sellportfolio`);
+    const { data } = await axiosInstance.get(`/api/sellportfolio`);
 
     // console.log(data);
 
@@ -39,7 +44,7 @@ export const listSellPortfolioByClientId = (id) => async (dispatch, getState) =>
       },
     };
 
-    const { data } = await axios.get(`/api/sellportfolio/${id}/client`, config);
+    const { data } = await axiosInstance.get(`/api/sellportfolio/${id}/client`, config);
     console.log(data);
 
     dispatch({
@@ -61,7 +66,7 @@ export const getSellPortfolioDetails = (id) => async (dispatch) => {
   try {
     dispatch({ type: SELL_PORTFOLIO_DETAILS_REQUEST });
 
-    const { data } = await axios.get(`/api/sellportfolio/${id}`);
+    const { data } = await axiosInstance.get(`/api/sellportfolio/${id}`);
 
     dispatch({
       type: SELL_PORTFOLIO_DETAILS_SUCCESS,
@@ -94,7 +99,7 @@ export const deleteSellPortfolio = (id) => async (dispatch, getState) => {
       },
     };
 
-    await axios.delete(`/api/sellportfolio/${id}`, config);
+    await axiosInstance.delete(`/api/sellportfolio/${id}`, config);
 
     dispatch({
       type: SELL_PORTFOLIO_DELETE_SUCCESS,
@@ -130,7 +135,7 @@ export const createSellPortfolio = (sellportfolio) => async (dispatch, getState)
       },
     };
 
-    const { data } = await axios.post(`/api/sellportfolio`, sellportfolio, config);
+    const { data } = await axiosInstance.post(`/api/sellportfolio`, sellportfolio, config);
 
     dispatch({
       type: SELL_PORTFOLIO_CREATE_SUCCESS,
@@ -168,7 +173,7 @@ export const updateSellPortfolio = (sellportfolio) => async (dispatch, getState)
       },
     };
 
-    const { data } = await axios.put(
+    const { data } = await axiosInstance.put(
       `/api/sellportfolio/${sellportfolio._id}`,
       sellportfolio,
       config

@@ -18,11 +18,16 @@ import {
 } from "../constants/articleConstants";
 import { logout } from "./userActions";
 
+const axiosInstance = axios.create({
+  baseURL:process.env.REACT_APP_API_URL,
+})
+
+
 export const listArticles = () => async (dispatch) => {
   try {
     dispatch({ type: ARTICLE_LIST_REQUEST });
 
-    const { data } = await axios.get(`/api/articles`);
+    const { data } = await axiosInstance.get(`/api/articles`);
 
     // console.log(data);
 
@@ -45,7 +50,7 @@ export const listArticleDetails = (id) => async (dispatch) => {
   try {
     dispatch({ type: ARTICLE_DETAILS_REQUEST });
 
-    const { data } = await axios.get(`/api/articles/${id}`);
+    const { data } = await axiosInstance.get(`/api/articles/${id}`);
 
     dispatch({
       type: ARTICLE_DETAILS_SUCCESS,
@@ -78,7 +83,7 @@ export const deleteArticle = (id) => async (dispatch, getState) => {
       },
     };
 
-    await axios.delete(`/api/articles/${id}`, config);
+    await axiosInstance.delete(`/api/articles/${id}`, config);
 
     dispatch({
       type: ARTICLE_DELETE_SUCCESS,
@@ -114,7 +119,7 @@ export const createArticle = (article) => async (dispatch, getState) => {
       },
     };
 
-    const { data } = await axios.post(`/api/articles`, article, config);
+    const { data } = await axiosInstance.post(`/api/articles`, article, config);
 
     dispatch({
       type: ARTICLE_CREATE_SUCCESS,
@@ -152,7 +157,7 @@ export const updateArticle = (article) => async (dispatch, getState) => {
       },
     };
 
-    const { data } = await axios.put(
+    const { data } = await axiosInstance.put(
       `/api/articles/${article._id}`,
       article,
       config

@@ -3,11 +3,16 @@ import { WITHDRAW_FUNDS_CREATE_FAIL, WITHDRAW_FUNDS_CREATE_REQUEST, WITHDRAW_FUN
 
 import { logout } from "./userActions";
 
+const axiosInstance = axios.create({
+  baseURL:process.env.REACT_APP_API_URL,
+})
+
+
 export const withdrawList = () => async (dispatch) => {
   try {
     dispatch({ type: WITHDRAW_FUNDS_LIST_REQUEST });
 
-    const { data } = await axios.get(`/api/withdraw`);
+    const { data } = await axiosInstance.get(`/api/withdraw`);
     // console.log(data);
     // return;
 
@@ -42,7 +47,7 @@ export const deleteWithdrawFund = (id) => async (dispatch, getState) => {
       },
     };
 
-    await axios.delete(`/api/withdraw/${id}`, config);
+    await axiosInstance.delete(`/api/withdraw/${id}`, config);
 
     dispatch({
       type: WITHDRAW_FUNDS_DELETE_SUCCESS,
@@ -78,7 +83,7 @@ export const createWithdrawFunds = (funds) => async (dispatch, getState) => {
       },
     };
 
-    const { data } = await axios.post(`/api/withdraw`, funds, config);
+    const { data } = await axiosInstance.post(`/api/withdraw`, funds, config);
 
     dispatch({
       type: WITHDRAW_FUNDS_CREATE_SUCCESS,

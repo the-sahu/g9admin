@@ -18,11 +18,16 @@ import {
 } from "../constants/businessConstants";
 import { logout } from "./userActions";
 
+const axiosInstance = axios.create({
+  baseURL:process.env.REACT_APP_API_URL,
+})
+
+
 export const listBusinesses = () => async (dispatch) => {
   try {
     dispatch({ type: BUSINESS_LIST_REQUEST });
 
-    const { data } = await axios.get(`/api/businesses`);
+    const { data } = await axiosInstance.get(`/api/businesses`);
 
     // console.log(data);
 
@@ -45,7 +50,7 @@ export const listBusinessDetails = (id) => async (dispatch) => {
   try {
     dispatch({ type: BUSINESS_DETAILS_REQUEST });
 
-    const { data } = await axios.get(`/api/businesses/${id}`);
+    const { data } = await axiosInstance.get(`/api/businesses/${id}`);
 
     dispatch({
       type: BUSINESS_DETAILS_SUCCESS,
@@ -78,7 +83,7 @@ export const deleteBusiness = (id) => async (dispatch, getState) => {
       },
     };
 
-    await axios.delete(`/api/businesses/${id}`, config);
+    await axiosInstance.delete(`/api/businesses/${id}`, config);
 
     dispatch({
       type: BUSINESS_DELETE_SUCCESS,
@@ -114,7 +119,7 @@ export const createBusiness = (business) => async (dispatch, getState) => {
       },
     };
 
-    const { data } = await axios.post(`/api/businesses`, business, config);
+    const { data } = await axiosInstance.post(`/api/businesses`, business, config);
 
     dispatch({
       type: BUSINESS_CREATE_SUCCESS,
@@ -152,7 +157,7 @@ export const updateBusiness = (business) => async (dispatch, getState) => {
       },
     };
 
-    const { data } = await axios.put(
+    const { data } = await axiosInstance.put(
       `/api/businesses/${business._id}`,
       business,
       config

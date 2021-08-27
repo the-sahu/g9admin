@@ -21,11 +21,16 @@ import {
 } from "../constants/portfolioConstants";
 import { logout } from "./userActions";
 
+const axiosInstance = axios.create({
+  baseURL:process.env.REACT_APP_API_URL,
+})
+
+
 export const listPortfolios = () => async (dispatch) => {
   try {
     dispatch({ type: PORTFOLIO_LIST_REQUEST });
 
-    const { data } = await axios.get(`/api/portfolio`);
+    const { data } = await axiosInstance.get(`/api/portfolio`);
 
     // console.log(data);
 
@@ -57,7 +62,7 @@ export const listPortfolioByClientId = (id) => async (dispatch, getState) => {
       },
     };
 
-    const { data } = await axios.get(`/api/portfolio/${id}/client`, config);
+    const { data } = await axiosInstance.get(`/api/portfolio/${id}/client`, config);
     console.log(data);
 
     dispatch({
@@ -79,7 +84,7 @@ export const getPortfolioDetails = (id) => async (dispatch) => {
   try {
     dispatch({ type: PORTFOLIO_DETAILS_REQUEST });
 
-    const { data } = await axios.get(`/api/portfolio/${id}`);
+    const { data } = await axiosInstance.get(`/api/portfolio/${id}`);
 
     dispatch({
       type: PORTFOLIO_DETAILS_SUCCESS,
@@ -112,7 +117,7 @@ export const deletePortfolio = (id) => async (dispatch, getState) => {
       },
     };
 
-    await axios.delete(`/api/portfolio/${id}`, config);
+    await axiosInstance.delete(`/api/portfolio/${id}`, config);
 
     dispatch({
       type: PORTFOLIO_DELETE_SUCCESS,
@@ -148,7 +153,7 @@ export const createPortfolio = (portfolio) => async (dispatch, getState) => {
       },
     };
 
-    const { data } = await axios.post(`/api/portfolio`, portfolio, config);
+    const { data } = await axiosInstance.post(`/api/portfolio`, portfolio, config);
 
     dispatch({
       type: PORTFOLIO_CREATE_SUCCESS,
@@ -186,7 +191,7 @@ export const updatePortfolio = (portfolio) => async (dispatch, getState) => {
       },
     };
 
-    const { data } = await axios.put(
+    const { data } = await axiosInstance.put(
       `/api/portfolio/${portfolio._id}`,
       portfolio,
       config

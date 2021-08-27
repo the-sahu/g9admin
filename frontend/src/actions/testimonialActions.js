@@ -18,11 +18,16 @@ import {
 } from "../constants/testimonialConstants";
 import { logout } from "./userActions";
 
+const axiosInstance = axios.create({
+  baseURL:process.env.REACT_APP_API_URL,
+})
+
+
 export const listTestimonials = () => async (dispatch) => {
   try {
     dispatch({ type: TESTIMONIAL_LIST_REQUEST });
 
-    const { data } = await axios.get(`/api/testimonials`);
+    const { data } = await axiosInstance.get(`/api/testimonials`);
 
     // console.log(data);
 
@@ -45,7 +50,7 @@ export const listTestimonialDetails = (id) => async (dispatch) => {
   try {
     dispatch({ type: TESTIMONIAL_DETAIL_REQUEST });
 
-    const { data } = await axios.get(`/api/testimonials/${id}`);
+    const { data } = await axiosInstance.get(`/api/testimonials/${id}`);
 
     dispatch({
       type: TESTIMONIAL_DETAIL_SUCCESS,
@@ -78,7 +83,7 @@ export const deleteTestimonial = (id) => async (dispatch, getState) => {
       },
     };
 
-    await axios.delete(`/api/testimonials/${id}`, config);
+    await axiosInstance.delete(`/api/testimonials/${id}`, config);
 
     dispatch({
       type: TESTIMONIAL_DELETE_SUCCESS,
@@ -115,7 +120,7 @@ export const createTestimonial =
         },
       };
 
-      const { data } = await axios.post(
+      const { data } = await axiosInstance.post(
         `/api/testimonials`,
         testimonial,
         config
@@ -158,7 +163,7 @@ export const updateTestimonial =
         },
       };
 
-      const { data } = await axios.put(
+      const { data } = await axiosInstance.put(
         `/api/testimonials/${testimonial._id}`,
         testimonial,
         config
