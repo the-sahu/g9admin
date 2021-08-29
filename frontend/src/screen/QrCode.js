@@ -57,7 +57,7 @@ const QrCode = ({ history, match }) => {
       
         <div>   
         
-            <img src="newqr.jpg" className="mx-auto p-5 h-full w-full" alt="" />
+            <img src={user.qrimage} className="mx-auto p-5 h-full w-full" alt="" />
            
             <p className="text-center text-xs capitalize pt-2">All related banks payments are accepted*</p>
         </div>

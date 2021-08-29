@@ -68,7 +68,8 @@ const registerUser = asyncHandler(async (req, res) => {
           netProfit,
           netLoss,
           segments,
-          image
+          image,
+          qrimage
   });
 
   if (user) {
@@ -84,6 +85,7 @@ const registerUser = asyncHandler(async (req, res) => {
       bankAccount: user.bankAccount,
       segments: user.segments,
       image: user.image,
+      qrimage: user.qrimage,
       isAdmin: user.isAdmin,
       token: generateToken(user._id),
     });
@@ -198,7 +200,8 @@ const updateUser = asyncHandler(async (req, res) => {
       netLoss,
       netProfit,
       segments,
-      image, } = req.body;
+      image,
+      qrimage, } = req.body;
 
     if (user) {
       user.name = name;
@@ -214,8 +217,9 @@ const updateUser = asyncHandler(async (req, res) => {
       user.netProfit = netProfit;
       user.netLoss = netLoss;
       user.segments = segments;
-      
       user.image = image;
+      user.qrimage = qrimage;
+      
     }
     const updatedTeam = await user.save();
     console.log(updatedTeam);

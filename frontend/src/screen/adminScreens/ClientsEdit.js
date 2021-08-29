@@ -20,6 +20,7 @@ const ClientsEdit = ({ history, match }) => {
   const [netLoss, setnetLoss] = useState("");
   const [segments, setSegments] = useState("");
   const [image, setImage] = useState("");
+  const [qrimage, setQrImage] = useState("");
   const [uploading, setUploading] = useState(false);
 
   const dispatch = useDispatch();
@@ -78,6 +79,7 @@ const ClientsEdit = ({ history, match }) => {
         setnetLoss(user.netLoss);
         setSegments(user.segments);
         setImage(user.image);
+        setQrImage(user.qrimage);
         // console.log(description);
       }
     }
@@ -112,6 +114,28 @@ const ClientsEdit = ({ history, match }) => {
       setUploading(false);
     }
   };
+  const uploadQrImageFileHandler = async (e) => {
+    const file = e.target.files[0];
+    const formData = new FormData();
+    formData.append("image", file);
+    setUploading(true);
+
+    try {
+      const config = {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      };
+
+      const { data } = await axiosInstance.post("/api/upload", formData, config);
+
+      setQrImage(data);
+      setUploading(false);
+    } catch (error) {
+      console.error(error);
+      setUploading(false);
+    }
+  };
 
   const submitHandler = async (e) => {
     e.preventDefault();
@@ -133,6 +157,7 @@ if(userId){
         netProfit,
         segments,
         image,
+        qrimage,
         
       })
     );
@@ -153,19 +178,12 @@ else {
           netProfit,
           netLoss,
           segments,
-          image}
+          image,
+          qrimage}
       )
     )
     console.log(name,
-        email, 
-        password,
-        clientId,
-        phone,
-        pan,
-      demate,
-      bankAccount,
-      segments,
-      image);
+        qrimage);
   }
   
   };
@@ -386,6 +404,74 @@ else {
                           </div>
                           <img
                             src={image}
+                            className="h-full w-full  mx-auto object-cover object-center"
+                          />
+                        </div>
+                      )}
+
+                </div>
+                <label className=" text-sm font-medium  text-gray-700">
+                  QR Scan photo
+                </label>
+                <div className="flex justify-center items-center   w-full pt-5 pb-6 border-2 bg-white h-48 border-gray-300 border-dashed rounded-md">
+                {!qrimage ? (
+                    <div className="space-y-1 text-center">
+                      <svg
+                        className="mx-auto h-12 w-12 text-gray-400"
+                        stroke="currentColor"
+                        fill="none"
+                        viewBox="0 0 48 48"
+                        aria-hidden="true"
+                      >
+                        <path
+                          d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02"
+                          strokeWidth={2}
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
+                      </svg>
+                      <div className="flex text-sm text-gray-600">
+                        <input
+                          type="text"
+                          placeholder="Enter image url"
+                          value={qrimage}
+                          onChange={(e) => setQrImage(e.target.value)}
+                         className="sr-only"
+                        />
+                        <label
+                          htmlFor="file-upload"
+                          className="relative cursor-pointer bg-white rounded-md font-medium text-primary-500 hover:text-primary-300 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-primary-500"
+                        >
+                          <span>Upload a file</span>
+                          <input
+                            id="file-upload"
+                            name="file-upload"
+                            type="file"
+                            onChange={uploadQrImageFileHandler}
+                            className="sr-only"
+                          />
+                        </label>
+                        <p className="pl-1">or drag and drop</p>
+                      </div>
+                      <p className="text-xs text-gray-500">
+                        PNG &amp; JPG to 2MB
+                      </p>
+                      <p className="text-xs text-gray-500">
+                        Size: 400X400 pixels
+                      </p>
+                    </div>
+                     ) : (
+                        <div className="h-48 w-full pb-6 ">
+                          <div
+                            className="bg-gray-100 cursor-pointer p-2 w-8 h-8 "
+                            onClick={(e) => setQrImage("")}
+                          >
+                            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 pr-2 w-6 text-red-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                        </svg>
+                          </div>
+                          <img
+                            src={qrimage}
                             className="h-full w-full  mx-auto object-cover object-center"
                           />
                         </div>

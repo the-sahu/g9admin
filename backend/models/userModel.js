@@ -29,6 +29,9 @@ const userSchema = mongoose.Schema(
     image: {
       type: String,
     },
+    qrimage: {
+      type: String,
+    },
     phone: {
       type: String,
     },
