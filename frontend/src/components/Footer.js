@@ -47,7 +47,7 @@ const Footer = () => {
                 }
                 {userInfo.isAdmin && 
                 <div className="flex-1 group">
-                <Link to="/admin/sellportfolio" className="flex items-end justify-center text-center mx-auto px-0 pt-2 w-full text-gray-800 group-hover:text-primary-600">
+                <Link to="/adminsellportfolio" className="flex items-end justify-center text-center mx-auto px-0 pt-2 w-full text-gray-800 group-hover:text-primary-600">
                     <span className="block px-1 pt-1 pb-1">
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-8 text-primary-500 text-center mx-auto w-8 text-2xl pt-1 mb-1 block" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 13v-1m4 1v-3m4 3V8M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z" />
@@ -60,7 +60,7 @@ const Footer = () => {
                 }
                 {userInfo.isAdmin ? 
                 <div className="flex-1 group">
-                    <Link to="/admin/portfolio" className="flex items-end justify-center text-center mx-auto px-0 pt-2 w-full text-gray-800 group-hover:text-primary-600">
+                    <Link to="/adminportfolio" className="flex items-end justify-center text-center mx-auto px-0 pt-2 w-full text-gray-800 group-hover:text-primary-600">
                         <span className="block px-1 pt-1 pb-1">
                         <svg xmlns="http://www.w3.org/2000/svg" className="h-8 text-primary-500 text-center mx-auto w-8 text-2xl pt-1 mb-1 block" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 13v-1m4 1v-3m4 3V8M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z" />
@@ -103,7 +103,7 @@ const Footer = () => {
                         <svg xmlns="http://www.w3.org/2000/svg" className="h-8 text-primary-500 text-center mx-auto w-8 text-2xl pt-1 mb-1 block" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
                         </svg>
-                            <span className="block text-sm text-black font-semibold pb-2">Demate</span>
+                            <span className="block text-sm text-black font-semibold pb-2">Demat</span>
                             <span className="block w-5 mx-auto h-1 group-hover:bg-primary-600 rounded-full"></span>
                         </span>
                     </Link>

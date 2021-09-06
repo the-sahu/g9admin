@@ -30,35 +30,35 @@ const defaultScreens = () => (
       <Route path="/client"  component={ClientsList} exact/>
       <Route path="/client/:id/edit"  component={ClientsEdit} exact/>
 
-      <Route path="/admin/sellportfolio" component={SellPortfolioList} exact />
-      <Route path="/admin/portfolio" component={PortfolioList} exact />
+      <Route path="/adminsellportfolio" component={SellPortfolioList} exact />
+      <Route path="/adminportfolio" component={PortfolioList} exact />
     <Route
-      path="/admin/sellportfolio/:clientId"
+      path="/adminsellportfolio/:clientId"
       component={ClientSellPortfolioList}
       exact
     />
     <Route
-      path="/admin/portfolio/:clientId"
+      path="/adminportfolio/:clientId"
       component={ClientPortfolioList}
       exact
     />
     <Route
-      path="/admin/sellportfolio/:clientId/edit/:id"
+      path="/adminsellportfolio/:clientId/edit/:id"
       component={SellPortfolioEdit}
       exact
     />
     <Route
-      path="/admin/portfolio/:clientId/edit/:id"
+      path="/adminportfolio/:clientId/edit/:id"
       component={PortfolioEdit}
       exact
     />
     <Route
-      path="/admin/addportfolio/:clientId"
+      path="/adminaddportfolio/:clientId"
       component={PortfolioEdit}
       exact
     />
     <Route
-      path="/admin/selladdportfolio/:clientId"
+      path="/adminselladdportfolio/:clientId"
       component={SellPortfolioEdit}
       exact
     />

@@ -46,11 +46,11 @@ const SellPortfolioEdit = ({ history, match }) => {
       history.push("/login");
     }
     if (sellportfolioCreated) {
-      history.push("/admin/sellportfolio");
+      history.push("/adminsellportfolio");
     }
     if (successUpdate) {
       dispatch({ type: SELL_PORTFOLIO_UPDATE_RESET });
-      history.push("/admin/sellportfolio");
+      history.push("/adminsellportfolio");
     } else {
       if (sellportfolio._id !== portfolioId) {
         dispatch(getSellPortfolioDetails(portfolioId));

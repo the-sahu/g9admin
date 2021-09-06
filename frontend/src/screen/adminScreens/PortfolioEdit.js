@@ -49,11 +49,11 @@ const PortfolioEdit = ({ history, match }) => {
       history.push("/login");
     }
     if (createdPortfolio) {
-      history.push("/admin/portfolio");
+      history.push("/adminportfolio");
     }
     if (successUpdate) {
       dispatch({ type: PORTFOLIO_UPDATE_RESET });
-      history.push("/admin/portfolio");
+      history.push("/adminportfolio");
     } else {
       if (portfolio._id !== portfolioId) {
         dispatch(getPortfolioDetails(portfolioId));
