@@ -38,8 +38,6 @@ const ClientPortfolioList = ({ history, match }) => {
     }
   }, [dispatch, history, userInfo, successDelete]);
 
-  const onOpenModal = () => setOpen(true);
-  const onCloseModal = () => setOpen(false);
 
   const deleteHandler = (id) => {
     dispatch(deletePortfolio(id));
@@ -49,7 +47,7 @@ const ClientPortfolioList = ({ history, match }) => {
     <div className="bg-primary-50 pb-24">
       <div className="px-5 py-5">
         <Link
-          to={`/admin/addportfolio/${clientId}`}
+          to={`/adminaddportfolio/${clientId}`}
           class="flex items-center w-32  justify-center px-2 h-10  font-medium tracking-wide text-white transition duration-200 rounded shadow-md bg-black  focus:shadow-outline focus:outline-none"
           aria-label="Sign up"
           title="Sign up"

@@ -92,7 +92,7 @@ const PortfolioList = ({ history }) => {
                     {client.clientId}
                   </td>
                   <td class=" flex justify-between py-3 w-24 px-4 text-center p-0 text-wrap border border-gray-700 text-xs font-brand tracking-wide">
-                    <Link to={`portfolio/${client._id}/`}>
+                    <Link to={`adminportfolio/${client._id}/`}>
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         className="h-6 w-6"

@@ -1,7 +1,8 @@
 {
   "name": "g9app",
   "version": "0.1.0",
-  "homepage": ".",
+  "proxy": "http://127.0.0.1:5000",
+  "private":true,
   "dependencies": {
     "@craco/craco": "^6.2.0",
     "@fortawesome/fontawesome-svg-core": "^1.2.36",

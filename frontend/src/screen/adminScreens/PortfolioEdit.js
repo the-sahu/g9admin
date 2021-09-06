@@ -94,15 +94,7 @@ const PortfolioEdit = ({ history, match }) => {
         })
       );
     } else {
-      // console.log(
-      //   date,
-      //   stockName,
-      //   buyPrice,
-      //   buyQty,
-      //   sellQty,
-      //   sellPrice,
-      //   client
-      // );
+
       dispatch(
         createPortfolio({
           date,
